@@ -59,6 +59,10 @@ export const login = async(req,res)=>{
             return res.status(400).json({error:'Invalid username or password'});
         }
         generateTokenSetCookie(user._id,res);
+        /*
+        I MADE A VERY BIG MISTAKE 
+        I did not add the below json response and so the login functionality was not working properly
+        */
         res.status(200).json({
 			_id: user._id,
 			fullName: user.fullName,
