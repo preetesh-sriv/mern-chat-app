@@ -1,5 +1,6 @@
 import Conversation from "../models/conversation.model.js";
 import Message from "../models/message.model.js"; //I forgot to import Message
+import { getReceiverSocketId , io } from "../socket/socket.js";
 
 export const sendMessage = async(req,res)=>{
     try {
@@ -24,14 +25,22 @@ export const sendMessage = async(req,res)=>{
         if(newMessage){
             conversation.messages.push(newMessage._id);
         }
-        //SOCKET.IO functinality to add here
-
+        
         // await conversation.save();
-
+        
         // await newMessage.save(); //MUST remeber to save in the DB
         // The below will run in parellel while above will run one after the other
         await Promise.all([conversation.save() , newMessage.save()]);
-        res.status(201).json({newMessage});
+        //SOCKET.IO functinality to add here(added down)
+        
+        const receiverSocketId = getReceiverSocketId(receiverId);
+        if(receiverId){
+            io.to(receiverSocketId).emit('newMessage',newMessage) //io.to used to send events to specific client
+            
+        }
+        // res.status(201).json({newMessage}); #THIS WAS WRONG THAT IS WHY I WAS NOT ABLE TO GET THE CHAT WHILE SENDING
+
+        res.status(201).json(newMessage);
     } catch (error) {
         console.log("Error in sendMessage controller:",error.message)
         res.status(500).json({error: "Internal server error"})

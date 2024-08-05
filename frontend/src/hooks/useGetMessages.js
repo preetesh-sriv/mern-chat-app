@@ -38,6 +38,6 @@ Calling getMessages:
 If the condition is met, the getMessages function is called. This function fetches the messages for the selected conversation, sets the loading state to true while the fetch is in progress, and updates the state with the fetched messages once the fetch is complete.
 */
 
-	return { messages, loading };
+ return { messages, loading };
 };
 export default useGetMessages;

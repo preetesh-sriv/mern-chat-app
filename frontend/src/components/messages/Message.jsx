@@ -10,7 +10,9 @@ const Message =  ({ message }) => {
     }
 
 	const fromMe = message.senderId === authUser._id;
-  console.log('fromMe:', fromMe, 'message.senderId:', message.senderId, 'authUser._id:', authUser._id);
+	
+//   console.log('fromMe:', fromMe, 'message.senderId:', message.senderId, 'authUser._id:', authUser._id); -> Working so I commented
+
   if (!message.senderId) {
 	console.warn('message.senderId is undefined:', message);
 	return null;  // or return a loading state/component
