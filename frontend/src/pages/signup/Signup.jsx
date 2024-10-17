@@ -65,7 +65,7 @@ const SignUp = () => {
 
       <div>
       <label className='label'>
-							<span className='text-base label-text'>Username</span>
+							<span className='text-base label-text'>Password</span>
 			</label>
         <input
           type='password'
@@ -78,7 +78,7 @@ const SignUp = () => {
 
       <div>
       <label className='label'>
-							<span className='text-base label-text'>Username</span>
+							<span className='text-base label-text'>Confirm password</span>
 			</label>
         <input
           type='password'
